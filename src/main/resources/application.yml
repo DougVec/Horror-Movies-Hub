@@ -1,0 +1,43 @@
+spring:
+  mvc:
+    problemdetails:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/horrorhub
+    username: horrorhub
+    password: horrorhub
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  data:
+    redis:
+      # Redis aqui é só cache, não guarda entidades
+      repositories:
+        enabled: false
+      host: localhost
+      port: 6379
+  cache:
+    type: redis
+    redis:
+      time-to-live: 6h
+
+jwt:
+  # HS256 exige ao menos 32 bytes; em produção defina JWT_SECRET
+  secret: ${JWT_SECRET:dev-only-segredo-troque-em-producao-0123456789}
+  expiracao: 2h
+
+tmdb:
+  base-url: https://api.themoviedb.org/3
+  token: ${TMDB_TOKEN:}
+
+telegram:
+  base-url: https://api.telegram.org
+  # vazio = mensagens só vão para o log (útil em dev)
+  token: ${TELEGRAM_BOT_TOKEN:}
+
+alertas:
+  intervalo: PT6H
+  atraso-inicial: PT1M
+  # TMDB aceita ~40 req/10s; 300ms entre chamadas fica bem abaixo disso
+  pausa-tmdb: 300ms
