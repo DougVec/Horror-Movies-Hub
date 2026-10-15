@@ -212,5 +212,4 @@ O CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) roda `mvn verify` 
 
 ## Próximos passos
 
-- Deploy (Render ou Railway)
 - Front simples (React ou Thymeleaf)
