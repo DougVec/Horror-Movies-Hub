@@ -190,6 +190,20 @@ A API sobe em `http://localhost:8080` e o Flyway cria o schema.
 | `JWT_SECRET` | segredo HS256 (≥ 32 bytes) | valor de dev, **troque em produção** |
 | `TELEGRAM_BOT_TOKEN` | token do bot ([@BotFather](https://t.me/BotFather)) | vazio = mensagens só no log |
 
+### Testar sem token da TMDB (modo demo)
+
+O perfil `demo` aponta para uma TMDB falsa ([`dev/tmdb-fake`](dev/tmdb-fake/server.py)) com um catálogo de demonstração: 10 clássicos de terror com duração, nota e streaming, 2 estreias futuras e uma comédia (que a busca filtra).
+
+```bash
+docker compose --profile demo up -d
+```
+
+```bash
+mvn spring-boot:run -Dspring-boot.run.profiles=demo
+```
+
+Abra `http://localhost:8080/swagger-ui.html` e busque por `iluminado`, `invocacao` ou só `o` para trazer o catálogo inteiro. No perfil demo o job de alertas roda a cada minuto e, sem `TELEGRAM_BOT_TOKEN`, as mensagens aparecem no log.
+
 Para receber alertas: mande uma mensagem ao seu bot, pegue o `chat.id` em `https://api.telegram.org/bot<TOKEN>/getUpdates` e envie para `PUT /usuarios/me/telegram`.
 
 ## Testes

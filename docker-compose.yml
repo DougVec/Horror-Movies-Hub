@@ -12,5 +12,13 @@ services:
     image: redis:7
     ports: ["6379:6379"]
 
+  # só sobe com --profile demo: TMDB falsa para testar sem token
+  tmdb-fake:
+    image: python:3.13-alpine
+    profiles: [demo]
+    command: python -u /app/server.py
+    volumes: [./dev/tmdb-fake:/app:ro]
+    ports: ["8099:8099"]
+
 volumes:
   pgdata:

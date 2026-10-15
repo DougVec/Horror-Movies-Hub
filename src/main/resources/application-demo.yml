@@ -1,0 +1,9 @@
+# Perfil para testar sem token da TMDB: usa a TMDB falsa do docker compose (--profile demo).
+tmdb:
+  base-url: http://localhost:8099/3
+  token: demo
+
+alertas:
+  # roda logo e com frequência, para dar para ver o job funcionando
+  atraso-inicial: PT30S
+  intervalo: PT1M
